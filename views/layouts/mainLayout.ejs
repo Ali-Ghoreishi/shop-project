@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/bootstrap-rtl.css" />
+    <link rel="stylesheet" href="/css/font-awesome.css" />
+    <% if( path === '/register' || path === '/login' ){ %>
+    <link rel="stylesheet" href="/css/signin.css" />
+    <% } %> <% if( path === '/404') { %>
+    <link rel="stylesheet" href="/css/404.css" />
+    <% } %>
+    <title><%= pageTitle %></title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap5.min.css" rel="stylesheet" />
+
+    <%- include("../includes/style.ejs") -%> 
+
+    <!-- Custom styles for this template -->
+    <link href="css/headers.css" rel="stylesheet" />
+  </head>
+  <body>
+    <%- body -%>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+

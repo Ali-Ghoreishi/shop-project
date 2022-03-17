@@ -1,0 +1,31 @@
+{
+  "name": "shop-project",
+  "version": "1.0.0",
+  "description": "Simple Shop",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app",
+    "dev": "cross-env NODE_ENV=development DEBUG=shop-project nodemon -e html,ejs,env,js app"
+  },
+  "keywords": [],
+  "author": "Ali Ghoreishi",
+  "license": "MIT",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
+    "connect-flash": "^0.1.1",
+    "debug": "^4.3.3",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.2.3",
+    "nodemon": "^2.0.15",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
