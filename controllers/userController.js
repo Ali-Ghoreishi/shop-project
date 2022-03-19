@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const passport = require('passport');
 
 const User = require("../models/User");
 
@@ -31,8 +32,19 @@ exports.login = (req, res) => {
   res.render("login", {
     path: "/login",
     pageTitle: "ورود به حساب کاربری",
+    message: req.flash('success_msg'),
+    error: req.flash("error")
   });
 };
+
+// handle Login
+exports.handleLogin = (req, res , next) => {
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true
+  }) (req, res, next)
+}
 
 // Create User
 exports.createUser = async (req, res) => {
@@ -54,6 +66,7 @@ exports.createUser = async (req, res) => {
     // Password hashing
     const hash = await bcrypt.hash(password, 10)
     await User.create({fullname, email, password: hash})
+    req.flash("success_msg", "ثبت نام موفقیت امیز بود.")
     res.redirect("/login");
 
 

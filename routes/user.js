@@ -17,6 +17,9 @@ router.post("/register", userController.createUser)
 //* Login Page
 router.get("/login", userController.login);
 
+//* Login Handle
+router.post("/login", userController.handleLogin)
+
 //* Products Page
 router.get("/products", userController.products);
 

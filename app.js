@@ -5,22 +5,41 @@ const bodyParser = require('body-parser');
 const dotEnv =  require('dotenv');
 const logger = require('debug')('shop-project');
 const expressLayout = require('express-ejs-layouts');
+const passport = require('passport');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const connectDB =  require('./config/db');
 
+const app = express()
 
 //* Load Config
 dotEnv.config({path: './config/config.env'})
 
-const app = express()
+//* Database Connection
+connectDB();
+logger("Connected to Database")
 
+//* Passport Configuration
+require('./config/passport');
 
 //* BodyParser
 app.use(express.urlencoded({extended:false}))
 
-//* Database Connection
-connectDB();
-logger("Connected to Database")
+//* Session
+app.use(session({
+    secret: 'secret',
+    cookie: { maxAge: 60000 },
+    resave: false,
+    saveUninitialized: false
+}))
+
+//* Passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+//* Flash
+app.use(flash()) //req.flash
 
 //* View Engine
 app.use(expressLayout)

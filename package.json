@@ -23,6 +23,8 @@
     "express-session": "^1.17.2",
     "mongoose": "^6.2.3",
     "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
