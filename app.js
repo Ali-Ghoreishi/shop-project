@@ -1,12 +1,14 @@
 const path = require('path');
 
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotEnv =  require('dotenv');
 const logger = require('debug')('shop-project');
 const expressLayout = require('express-ejs-layouts');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 
 const connectDB =  require('./config/db');
@@ -29,9 +31,10 @@ app.use(express.urlencoded({extended:false}))
 //* Session
 app.use(session({
     secret: 'secret',
-    cookie: { maxAge: 60000 },
+     cookie: { maxAge: 432000000 },    // 5 day
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }) ,   //save all sessions in Database
 }))
 
 //* Passport
@@ -51,6 +54,12 @@ app.set('layout', './layouts/mainLayout')
 //* Static Folder
 app.use(express.static(path.join(__dirname ,'public')))
 app.use(express.static(path.join(__dirname ,'node_modules')))
+
+//* Locals(variables accessible in templates)
+app.use(function(req, res, next){
+    res.locals.session = req.session
+    next()
+})
 
 
 //* Routes
