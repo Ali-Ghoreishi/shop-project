@@ -63,11 +63,11 @@
             </a>
           </li>
           <!-- <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
-                Dashboard
-              </a>
-            </li>-->
+                <a href="#" class="nav-link text-white">
+                  <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+                  Dashboard
+                </a>
+              </li>-->
 
           <li>
             <a href="/" class="nav-link text-white">
@@ -83,22 +83,32 @@
   </div>
   <div class="px-3 py-2 border-bottom mb-3">
     <div class="container d-flex flex-wrap justify-content-center">
-      <% if(fullname.length > 0) { %> 
-        <input type="text" style="border: none;" name="userField" value="<%= fullname %> ">
-        <% } %> 
+      <% if(fullname.length > 0) { %>
+      <input
+        type="text"
+        style="border: none"
+        name="userField"
+        value="<%= fullname %> "
+      />
+      <% } %>
       <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-        <% if( session.cart ){ %> 
-        <a href="/shopping-cart" style="text-decoration: none;"><span class="badge badge-info"><%= session.cart.totalQty %></span> سبد خرید</a>
-         <% }else{ %>  
-          <a href="/shopping-cart" style="text-decoration: none;">سبد خرید</a>
-          <% } %> 
+        <input
+          type="button"
+          class="form-control"
+          value="سبد خرید"
+          disabled
+          style="display: none"
+        />
       </form>
 
       <div class="text-end">
         <button type="button" class="btn btn-light text-dark me-2">
-          <a style="text-decoration: none" href="<%= logStatus==='out'?'/login':'/logout'%>">
+          <a
+            style="text-decoration: none"
+            href="<%= logStatus==='out'?'/login':'/logout'%>"
+          >
             <%= logStatus==='out'?'ورود':'خروج'%>
-        </a>
+          </a>
         </button>
         <button type="button" class="btn btn-light">
           <a style="text-decoration: none; color: black" href="/register"
@@ -110,56 +120,70 @@
   </div>
 </header>
 
-<br /><br />
-<div class="slideshow-container">
-  <div class="mySlides fade">
-    <div class="numbertext">1 / 3</div>
-    <img src="pictures/1.jpg" style="width: 100%" />
-    <div class="text">Caption Image</div>
-  </div>
+<% if(products) { %>
+<div class="rtl" style="margin-top: 40px; margin-right: 110px">
+  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+    <ul class="list-group">
+      <% products.forEach( p => { %>
+      <li class="list-group-item">
+        <strong><%= p.item.title %> </strong>
+        <span class="badge badge-info"><%= p.price %> </span>
+        <div class="btn-group" style="margin-left: 10px">
+          <button
+            class="btn btn-primary dropdown-toggle btn-xs"
+            type="button"
+            data-toggle="dropdown"
+          >
+            تغییر <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" style="text-decoration: none; padding-right: 20px">
+                کاهش تعداد
+              </a>
+            </li>
+            <li>
+              <a href="#" style="text-decoration: none; padding-right: 20px"
+                >حذف همه</a
+              >
+            </li>
+          </ul>
+        </div>
+        <span class="badge badge-dark" style="margin-right: 260px"
+          ><%= p.qty %>
+        </span>
+      </li>
 
-  <div class="mySlides fade">
-    <div class="numbertext">2 / 3</div>
-    <img src="pictures/2.jpg" style="width: 100%" />
-    <div class="text">Caption Image 2</div>
-  </div>
-
-  <div class="mySlides fade">
-    <div class="numbertext">3 / 3</div>
-    <img src="pictures/3.jpg" style="width: 100%" />
-    <div class="text">Caption Image 3</div>
+      <% }) %>
+    </ul>
   </div>
 </div>
-<br />
-<div style="text-align: center">
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
+<div class="rtl">
+  <div
+    class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"
+    style="margin-top: 20px"
+  >
+    <strong style="margin-right: 110px">
+      مجموع : <%= totalPrice %> تومان</strong
+    >
+  </div>
 </div>
-<script>
-  var slideIndex = 0;
-  ShowSlides();
-  function ShowSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-
-    slideIndex++;
-    if (slideIndex > slides.length) {
-      slideIndex = 1;
-    }
-
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-
-    setTimeout(ShowSlides, 2000);
-  }
-</script>
+<hr />
+<div class="rtl">
+  <div
+    class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"
+    style="margin-right: 110px"
+  >
+    <button type="button" class="btn btn-success">پرداخت</button>
+  </div>
+</div>
+<% } else { %>
+<div class="rtl">
+  <div
+    class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"
+    style="margin-top: 40px; margin-right: 110px"
+  >
+    <h2>سبد خرید خالی است</h2>
+  </div>
+</div>
+<% } %>

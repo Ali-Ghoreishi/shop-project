@@ -27,8 +27,11 @@ router.get("/logout", authenticated,userController.logout)
 //* Products Page
 router.get("/products", userController.products);
 
-//* Cart
-router.get("/cart" , userController.cart)
+//* Shopping Cart
+router.get("/shopping-cart" , userController.shoppingCart)
+
+//* Add to Cart
+router.get("/add-to-cart/:id", userController.addToCart)
 
 //* 404
 router.use(userController.p404)

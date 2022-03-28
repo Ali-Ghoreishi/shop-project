@@ -21,8 +21,6 @@
   </symbol>
 </svg>
 
-
-
   <header>
     <div class="px-3 py-2 bg-dark text-white">
       <div class="container">
@@ -60,7 +58,11 @@
           <input type="text" style="border: none;" name="userField" value="<%= fullname %> ">
           <% } %> 
         <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-          <a href="/cart" style="text-decoration: none;"><input type="button" class="form-control" value="سبد خرید"></a>
+          <% if( session.cart ){ %> 
+            <a href="/shopping-cart" style="text-decoration: none;"><span class="badge badge-info"><%= session.cart.totalQty %></span> سبد خرید</a>
+             <% }else{ %>  
+              <a href="/shopping-cart" style="text-decoration: none;">سبد خرید</a>
+              <% } %> 
         </form>
 
         <div class="text-end">
@@ -76,158 +78,33 @@
   </header>
 
   <div>
-      <form action="#" style="direction: rtl;">
-        <div class="album py-5 bg-light">
-            <div class="container">
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                  <div class="card shadow-sm">
-                    <!-- <svg  class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-                    <img src="<%= products[0].imagePath %> " alt="fff" height="269">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt1" value="<%= products[0].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                        </div>
-                        <small class="text-muted"><%= products[0].price %> ت</small>
+    <form action="#" style="direction: rtl;">
+      <div class="album py-5 bg-light">
+          <div class="container">
+            <% products.forEach( p => { %> 
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <% for(var i=0; i<p.length; i++) {%>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img src="<%= p[i].imagePath %> " alt="fff" height="269">
+                  <div class="card-body">
+                    <input type="text" style="border: none;" name="txt1" value="<%= p[i].title %> ">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="/add-to-cart/<%= p[i]._id %> " class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card shadow-sm">                   
-                    <img src="<%= products[1].imagePath %>" alt="fff" height="269">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt2" value="<%= products[1].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[1].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card shadow-sm">                   
-                    <img src="<%= products[2].imagePath %>" alt="fff" height="269">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt3" value="<%= products[2].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[2].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-        
-                <div class="col">
-                  <div class="card shadow-sm">
-                   
-                    <img src="<%= products[3].imagePath %>" alt="fff">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt4" value="<%= products[3].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[3].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card shadow-sm">
-                     
-                    <img src="<%= products[4].imagePath %>" alt="fff">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt5" value="<%= products[4].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[4].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card shadow-sm">
-                   
-                    <img src="<%= products[5].imagePath %>" alt="fff">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt6" value="<%= products[5].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[5].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-        
-                <div class="col">
-                  <div class="card shadow-sm">
-                    <img src="<%= products[6].imagePath %>" alt="fff" height="269">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt7" value="<%= products[6].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                        </div>
-                        <small class="text-muted"><%= products[6].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card shadow-sm">
-                    <img src="<%= products[7].imagePath %>" alt="fff">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt8" value="<%= products[7].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[7].price %> ت</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card shadow-sm">
-                    <img src="<%= products[8].imagePath %>" alt="fff">
-                    <div class="card-body">
-                      <input type="text" style="border: none;" name="txt9" value="<%= products[8].title %> ">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="/add-to-cart" class="btn btn-success pull-right" roll="button">افزودن به سبد خرید</a>
-                          <!-- <button type="button" class="btn btn-sm btn-outline-secondary">افزودن به سبد خرید</button> -->
-                        </div>
-                        <small class="text-muted"><%= products[8].price %> ت </small>
-                      </div>
+                      <small class="text-muted"><%= p[i].price %> ت</small>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </main>
-      </form>
-  </div>
-
+              <% } %>
+          </div> 
+          <% }) %> 
+        </div>
+      </div>
+    </form>
+</div>
 
 
   
